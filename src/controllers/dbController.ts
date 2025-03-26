@@ -1,9 +1,13 @@
 import { Request, Response } from 'express';
-import getDbData from '../services/teste';
+import getDbData from '../services/getData';
 
 const getData = async (req: Request, res: Response) => {
   try {
-    const data = await getDbData();
+    const { prompt } = req.body;
+    if (!prompt) {
+      return res.status(400).json({ error: 'Prompt is required' });
+    }
+    const data = await getDbData({ prompt });
     res.json(data);
   } catch (error) {
     console.error('Error in getData controller:', error);
