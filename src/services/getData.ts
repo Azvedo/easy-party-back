@@ -6,7 +6,6 @@ async function getDbData({ prompt }: { prompt: string }) {
     const response = await getOpenAIResponse(prompt);
     const query = response.trim(); // Remove espaços extras no início e no fim da string
 
-    console.log("Generated query:", query);
     // Executa a consulta SQL
     const data = await db.unsafe(query);
 
